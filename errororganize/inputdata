@@ -1,0 +1,170 @@
+Operating Sequence / Pattern :scan_gpu.opSeqs.TCC807xCS_REV0_GPU0_SCAN_CH_SC1_V000_multi
+Total fails                  :0
+Site                         :3
+Test Number                  :1582
+Test                         :funcTestDescriptor
+Number        Signal                 Failing Cycles        Expected States        
+
+Operating Sequence / Pattern :scan_gpu.opSeqs.TCC807xCS_REV0_GPU0_SCAN_CH_SC1_V000_multi2
+Total fails                  :0
+Site                         :3
+Test Number                  :1582
+Test                         :funcTestDescriptor
+Number        Signal                 Failing Cycles        Expected States        
+
+Operating Sequence / Pattern :scan_gpu.opSeqs.TCC807xCS_REV0_GPU0_SCAN_CH_SC1_V000_multi
+Total fails                  :3
+Site                         :3
+Test Number                  :1582
+Test                         :funcTestDescriptor
+Number        Signal                 Failing Cycles        Expected States        
+1             GPIO_E12               498                   H                   
+2             GPIO_E12               502                   H                   
+3             GPIO_E12               506                   H                   
+
+Operating Sequence / Pattern :scan_gpu.opSeqs.TCC807xCS_REV0_GPU0_SCAN_CH_SC1_V000_multi
+Total fails                  :5
+Site                         :3
+Test Number                  :1582
+Test                         :funcTestDescriptor
+Number        Signal                 Failing Cycles        Expected States        
+1             GPIO_E13               498                   H                   
+2             GPIO_E13               500                   H                   
+3             GPIO_E13               502                   H                   
+4             GPIO_E13               504                   H                   
+5             GPIO_E13               506                   H                   
+
+Operating Sequence / Pattern :scan_gpu.opSeqs.TCC807xCS_REV0_GPU0_SCAN_BR_SC1_V000_multi
+Total fails                  :0
+Site                         :3
+Test Number                  :1583
+Test                         :funcTestDescriptor
+Number        Signal                 Failing Cycles        Expected States        
+
+Operating Sequence / Pattern :scan_gpu.opSeqs.TCC807xCS_REV0_GPU0_SCAN_BR_SC1_V000_multi
+Total fails                  :10000
+Site                         :3
+Test Number                  :1583
+Test                         :funcTestDescriptor
+Number        Signal                 Failing Cycles        Expected States        
+1             GPIO_B03               499                   H                   
+2             GPIO_B03               500                   L                   
+3             GPIO_B03               502                   L                   
+4             GPIO_B03               503                   H                   
+5             GPIO_B03               506                   L                   
+6             GPIO_B03               507                   H                   
+7             GPIO_B03               510                   L                   
+8             GPIO_B03               511                   H                   
+9             GPIO_B03               514                   L                   
+10            GPIO_B03               515                   H                   
+11            GPIO_B03               518                   L                   
+12            GPIO_B03               519                   H                   
+13            GPIO_B03               520                   L                   
+14            GPIO_B03               521                   H                   
+15            GPIO_B03               522                   L                   
+16            GPIO_B03               523                   H                   
+17            GPIO_B03               525                   H                   
+18            GPIO_B03               527                   H                   
+19            GPIO_B03               529                   H                   
+20            GPIO_B03               530                   L                   
+21            GPIO_B03               531                   H                   
+22            GPIO_B03               533                   H                   
+23            GPIO_B03               535                   H                   
+24            GPIO_B03               539                   H                   
+25            GPIO_B03               540                   L                   
+26            GPIO_B03               542                   L                   
+27            GPIO_B03               543                   H                   
+28            GPIO_B03               544                   L                   
+29            GPIO_B03               547                   H                   
+30            GPIO_B03               548                   L                   
+31            GPIO_B03               551                   H                   
+32            GPIO_B03               555                   H                   
+33            GPIO_B03               559                   H                   
+34            GPIO_B03               561                   H                   
+35            GPIO_B03               562                   L                   
+36            GPIO_B03               563                   H                   
+37            GPIO_B03               565                   H                   
+38            GPIO_B03               566                   L                   
+39            GPIO_B03               569                   H                   
+40            GPIO_B03               572                   L                   
+41            GPIO_B03               573                   H                   
+42            GPIO_B03               574                   L                   
+43            GPIO_B03               576                   L                   
+44            GPIO_B03               577                   H                   
+45            GPIO_B03               579                   H                   
+46            GPIO_B03               581                   H                   
+47            GPIO_B03               583                   H                   
+48            GPIO_B03               585                   H                   
+49            GPIO_B03               586                   L                   
+50            GPIO_B03               587                   H                   
+51            GPIO_B03               588                   L                   
+52            GPIO_B03               589                   H                   
+53            GPIO_B03               591                   H                   
+54            GPIO_B03               592                   L                   
+55            GPIO_B03               594                   L                   
+56            GPIO_B03               596                   L                   
+57            GPIO_B03               597                   H                   
+58            GPIO_B03               601                   H                   
+59            GPIO_B03               602                   L                   
+60            GPIO_B03               603                   H                   
+61            GPIO_B03               604                   L                   
+62            GPIO_B03               605                   H                   
+63            GPIO_B03               606                   L                   
+64            GPIO_B03               607                   H                   
+65            GPIO_B03               608                   L                   
+66            GPIO_B03               609                   H                   
+67            GPIO_B03               613                   H                   
+68            GPIO_B03               616                   L                   
+69            GPIO_B03               617                   H                   
+70            GPIO_B03               618                   L                   
+71            GPIO_B03               619                   H                   
+72            GPIO_B03               620                   L                   
+73            GPIO_B03               621                   H                   
+74            GPIO_B03               622                   L                   
+75            GPIO_B03               623                   H                   
+76            GPIO_B03               627                   H                   
+77            GPIO_B03               629                   H                   
+78            GPIO_B03               630                   L                   
+79            GPIO_B03               632                   L                   
+80            GPIO_B03               633                   H                   
+81            GPIO_B03               634                   L                   
+82            GPIO_B03               635                   H                   
+83            GPIO_B03               638                   L                   
+84            GPIO_B03               640                   L                   
+85            GPIO_B03               641                   H                   
+86            GPIO_B03               642                   L                   
+87            GPIO_B03               645                   H                   
+88            GPIO_B03               650                   L                   
+89            GPIO_B03               651                   H                   
+90            GPIO_B03               653                   H                   
+91            GPIO_B03               654                   L                   
+92            GPIO_B03               656                   L                   
+93            GPIO_B03               658                   L                   
+94            GPIO_B03               659                   H                   
+95            GPIO_B03               662                   L                   
+96            GPIO_B03               663                   H                   
+97            GPIO_B03               666                   L                   
+98            GPIO_B03               667                   H                   
+99            GPIO_B03               670                   L                   
+100           GPIO_B03               673                   H                   
+101           GPIO_B03               675                   H                   
+102           GPIO_B03               676                   L                   
+103           GPIO_B03               679                   H                   
+104           GPIO_B03               681                   H                   
+105           GPIO_B03               683                   H                   
+106           GPIO_B03               685                   H                   
+107           GPIO_B03               686                   L                   
+108           GPIO_B03               687                   H                   
+109           GPIO_B03               688                   L                   
+110           GPIO_B03               692                   L                   
+111           GPIO_B03               695                   H                   
+112           GPIO_B03               701                   H                   
+113           GPIO_B03               703                   H                   
+114           GPIO_B03               705                   H                   
+115           GPIO_B03               708                   L                   
+116           GPIO_B03               713                   H                   
+117           GPIO_B03               716                   L                   
+118           GPIO_B03               719                   H                   
+119           GPIO_B03               720                   L                   
+120           GPIO_B03               725                   H                   
+121           GPIO_B03               727                   H                   

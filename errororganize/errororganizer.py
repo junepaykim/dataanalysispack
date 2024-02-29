@@ -17,7 +17,8 @@ def process_input_file(input_file_path: str) -> None:
                     file_mode = "a" if os.path.exists(f"{current_pattern}.txt") else "w"
                     write_output_file_formatted(current_pattern, data_lines, file_mode)
                 data_lines = []
-                current_pattern = line.split(":")[-1].strip()
+                current_pattern = line.split(":")[-1].strip().split('.')[-1]
+                #current_pattern = line.split(":")[-1].strip()
             elif line.strip().startswith("Number"):
                 data_lines.append(line.strip())
             elif line.strip() and data_lines:

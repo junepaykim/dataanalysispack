@@ -3,3 +3,5 @@ test.ipynb
 *.csv
 *.xlsx
 *.png
+
+./errororganize/errortest.py

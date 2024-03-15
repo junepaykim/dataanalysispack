@@ -75,14 +75,8 @@ def sort_and_remove_duplicates(filename: str) -> None:
 
         def custom_sort_key(x):
             parts = x.split()
-            gpio_parts = parts[1].partition("_")
-            devicename, _, latter = gpio_parts
-            code = latter[0]
-            numbers = int(latter[1:])
 
-            state = parts[2]
-
-            return (parts[0], devicename, code, numbers, state)
+            return (parts[0])
 
         sorted_lines = sorted(unique_lines, key=custom_sort_key)
 

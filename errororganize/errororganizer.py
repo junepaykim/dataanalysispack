@@ -76,7 +76,7 @@ def sort_and_remove_duplicates(filename: str) -> None:
         def custom_sort_key(x):
             parts = x.split()
 
-            return (parts[0])
+            return int((parts[0]))
 
         sorted_lines = sorted(unique_lines, key=custom_sort_key)
 

@@ -47,7 +47,7 @@ Site                         :3
 Test Number                  :1583
 Test                         :funcTestDescriptor
 Number        Signal                 Failing Cycles        Expected States        
-1             GPIO_B03               499                   H                   
+1             GPIO_B03               77                   H                   
 2             GPIO_B03               500                   L                   
 3             GPIO_B03               502                   L                   
 4             GPIO_B03               503                   H                   

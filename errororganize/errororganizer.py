@@ -40,9 +40,9 @@ def write_rawdata(pattern: str, data_lines: list, file_mode: str) -> None:
     주어진 패턴명에 따라 에러 데이터를 파일에 작성
     
     Args:
-        pattern (str): 파일명으로 사용될 패턴명.
-        data_lines (list): 파일에 작성할 데이터 라인들의 리스트.
-        file_mode (str): 파일을 열 때 사용할 모드 ('w' 또는 'a').
+        pattern (str): 파일명으로 사용될 패턴명
+        data_lines (list): 파일에 작성할 데이터 라인들의 리스트
+        file_mode (str): 파일을 열 때 사용할 모드 ('w', 'a')
     """
     if len(data_lines) > 1:
         filename = f"{pattern}.txt"
@@ -61,11 +61,11 @@ def write_rawdata(pattern: str, data_lines: list, file_mode: str) -> None:
 
 def sort_and_remove_duplicates(filename: str) -> None:
     """
-    지정된 파일에서 중복을 제거하고 cycle -> device_code -> device_alphabet -> device_Number -> state 순서로 데이터를 정렬
-    이 함수는 파일 내의 데이터를 고유하고 정렬된 상태로 유지하는 데 사용됩니다.
+    지정된 파일에서 중복을 제거하고 cycle로 데이터를 정렬
+    파일 내의 데이터를 정렬된 상태로 유지
     
     Args:
-        filename (str): 중복 제거 및 정렬을 수행할 파일명.
+        filename (str): 중복 제거 및 정렬을 수행할 파일명
     """
     if os.path.exists(filename):
         with open(filename, "r", encoding="utf-8") as file:
@@ -86,6 +86,7 @@ def sort_and_remove_duplicates(filename: str) -> None:
 
 
 def main():
+    # input_file_name 조정을 통해 처리 대상 파일 지정 가능
     input_file_name = "inputdata"
     current_dir = os.path.dirname(os.path.abspath(__file__))
     input_file_path = os.path.join(current_dir, input_file_name)

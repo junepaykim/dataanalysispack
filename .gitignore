@@ -3,5 +3,6 @@ test.ipynb
 *.csv
 *.xlsx
 *.png
+*.pdf
 
 ./errororganize/errortest.py

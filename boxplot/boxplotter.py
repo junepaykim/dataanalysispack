@@ -16,7 +16,9 @@ def graph_boxplot(
         output_dir (str): The directory where the box plot images will be saved. If None, defaults to "./output".
         colorful (bool): Determines whether each box in the box plot should have a unique color.
                          If False, all boxes will use the default color.
-
+    Returns:
+        None: This function does not return any value. It saves the box plots directly
+              to the filesystem.
     """
     if output_dir is None:
         output_dir = "./output"
@@ -25,6 +27,7 @@ def graph_boxplot(
 
     for key, data in data_dict.items():
         df = pd.DataFrame(data, columns=["X", "Y"])
+        df = df[df["X"] <= 8]
 
         if colorful:
             palette = sns.color_palette("hsv", n_colors=len(df["X"].unique()))

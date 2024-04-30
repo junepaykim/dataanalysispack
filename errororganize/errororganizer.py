@@ -38,7 +38,7 @@ def process_input_file(input_file_path: str) -> None:
 def write_rawdata(pattern: str, data_lines: list, file_mode: str) -> None:
     """
     주어진 패턴명에 따라 에러 데이터를 파일에 작성
-    
+
     Args:
         pattern (str): 파일명으로 사용될 패턴명
         data_lines (list): 파일에 작성할 데이터 라인들의 리스트
@@ -55,7 +55,8 @@ def write_rawdata(pattern: str, data_lines: list, file_mode: str) -> None:
                 output_file.write(header)
             for line in unique_lines:
                 parts = line.split()
-                formatted_line = f"{parts[2]:<15}\t{parts[1]:<10}\t{parts[3]:<15}\n"
+                parts3_replace = 1 if parts[3] == "H" else 0
+                formatted_line = f"C {parts[2]:<15}\t{parts[1]:<10}\t{parts3_replace:<15}\n"
                 output_file.write(formatted_line)
 
 
@@ -63,7 +64,7 @@ def sort_and_remove_duplicates(filename: str) -> None:
     """
     지정된 파일에서 중복을 제거하고 cycle로 데이터를 정렬
     파일 내의 데이터를 정렬된 상태로 유지
-    
+
     Args:
         filename (str): 중복 제거 및 정렬을 수행할 파일명
     """
@@ -75,8 +76,13 @@ def sort_and_remove_duplicates(filename: str) -> None:
 
         def custom_sort_key(x):
             parts = x.split()
-
-            return int((parts[0]))
+            
+            if parts[0].isdigit():
+                return int(parts[0])
+            elif len(parts[0]) == 1 and parts[1].isdigit():
+                return int(parts[1])
+            else:
+                return float('inf')
 
         sorted_lines = sorted(unique_lines, key=custom_sort_key)
 

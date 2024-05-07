@@ -129,29 +129,25 @@ def graph_scatterplot(
             )
             codenum_groups[value[0]].append((value[2], value[3]))
 
-        for codenum, points in codenum_groups.items():
-            if points:
-                x_coords, y_coords = zip(*points)
-                min_x, max_x = min(x_coords), max(x_coords)
-                min_y, max_y = min(y_coords), max(y_coords)
-                width, height = max_x - min_x, max_y - min_y
-                padded_rect = patches.Rectangle(
-                    (min_x - padding * width, min_y - padding * height),
-                    width + 2 * padding * width,
-                    height + 2 * padding * height,
-                    linewidth=1,
-                    edgecolor="r",
-                    facecolor="none",
-                )
-                plt.gca().add_patch(padded_rect)
-                plt.text(
-                    min_x + width / 2,
-                    max_y + padding * height,
-                    codenum,
-                    horizontalalignment="center",
-                    verticalalignment="top",
-                    fontsize=10,
-                )
+        rectangles = {
+            "RVT": {"xy": (0.28, 0.32), "width": 0.07, "height": 0.09},
+            "LVT": {"xy": (0.20, 0.24), "width": 0.07, "height": 0.09},
+            "SLVT": {"xy": (0.15, 0.17), "width": 0.08, "height": 0.09},
+        }
+
+        for key, rect in rectangles.items():
+            rect_patch = patches.Rectangle(
+                **rect, linewidth=1, edgecolor="r", facecolor="none", zorder = 3
+            )
+            plt.gca().add_patch(rect_patch)
+            plt.text(
+                rect["xy"][0] + rect["width"] / 2,
+                rect["xy"][1] + rect["height"],
+                key,
+                horizontalalignment="center",
+                verticalalignment="bottom",
+                fontsize=10,
+            )
 
         plt.title("RO_SDB_Vt_Targeting")
         plt.xlabel("RO_nMOS_SDB_Vtsat (N)")

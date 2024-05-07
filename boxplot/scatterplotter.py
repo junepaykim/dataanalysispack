@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 import os
 
 
@@ -28,6 +29,7 @@ def process_excel_file(filename: str) -> dict:
 
     df = pd.DataFrame(data, columns=columns)
 
+    indexrow = df.iloc[1]
     data_groups = {}
 
     for _, row in df.iterrows():
@@ -45,10 +47,8 @@ def process_excel_file(filename: str) -> dict:
         if codenum not in data_groups:
             data_groups[codenum] = {}
 
-        # Remove first four columns : ITEM_ID val(SPEC_LOW) 	val(TARGET)	val(SPEC_HIGH)
-
         tuple_array = [
-            (last_char, index, value)
+            (last_char, indexrow[index], value)
             for index, value in enumerate(row[4:], start=4)
             if pd.notna(value)
         ]
@@ -66,42 +66,109 @@ def process_excel_file(filename: str) -> dict:
             combined.setdefault(index, [None, None])[1] = value
 
         refined_data_groups[code] = [
-            (vals[0], vals[1]) for _, vals in sorted(combined.items())
+            (index, vals[0], vals[1]) for index, vals in sorted(combined.items())
         ]
 
     return refined_data_groups
 
 
-def graph_scatterplot(data_dict: dict, output_dir: str = None) -> None:
+def graph_scatterplot(
+    grouped_data: dict, output_dir: str = "./output", padding: float = 0.1
+) -> None:
     """
     Saves a scatter plot for each data group in the provided dictionary.
 
     Args:
-        data_dict (dict): A dictionary where keys are codenums and values are lists of tuples,
+        grouped_data (dict): A dictionary where keys are codenums and values are lists of tuples,
                           each tuple containing a pair of floats (N value, P value).
         output_dir (str): The directory where the scatter plot images will be saved.
-                          If None, uses "./output".
-
-    Returns:
-        None: Saves the scatter plots.
     """
-    if output_dir is None:
-        output_dir = "./output"
+    target_codenums = ["LVT", "RVT", "SLVT"]
+
+    plot_data = {
+        codenum: grouped_data[codenum]
+        for codenum in target_codenums
+        if codenum in grouped_data
+    }
+
+    index_int = []
+    for codenum in plot_data:
+        for data_list in plot_data[codenum]:
+            modified_data_list = (int(data_list[0]), data_list[1], data_list[2])
+            index_int.append((codenum,) + modified_data_list)
+
+    # Filtering out indexes greater than 8
+    all_values = [value for value in index_int if value[1] <= 8]
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    for codenum, data in data_dict.items():
-        x_values = [x[0] for x in data if x[0] is not None]
-        y_values = [y[1] for y in data if y[1] is not None]
+    if all_values:
+        index_color_map = {
+            index: i
+            for i, index in enumerate(sorted(set(val[1] for val in all_values)))
+        }
+        color_array = [index_color_map[val[1]] for val in all_values]
+        colors = plt.get_cmap("viridis")(
+            [
+                index_color_map[val[1]] / max(index_color_map.values())
+                for val in all_values
+            ]
+        )
+
         plt.figure(figsize=(10, 5))
-        plt.scatter(x_values, y_values, alpha=0.5)
-        plt.title(f"Scatter Plot for {codenum}")
-        plt.xlabel("N values")
-        plt.ylabel("P values")
+        codenum_groups = {codenum: [] for codenum in target_codenums}
+        for value in all_values:
+            label = f"NZWB2_{value[1]}"
+            plt.scatter(
+                value[2],
+                value[3],
+                color=colors[color_array.index(index_color_map[value[1]])],
+                label=label,
+                alpha=0.5,
+            )
+            codenum_groups[value[0]].append((value[2], value[3]))
+
+        for codenum, points in codenum_groups.items():
+            if points:
+                x_coords, y_coords = zip(*points)
+                min_x, max_x = min(x_coords), max(x_coords)
+                min_y, max_y = min(y_coords), max(y_coords)
+                width, height = max_x - min_x, max_y - min_y
+                padded_rect = patches.Rectangle(
+                    (min_x - padding * width, min_y - padding * height),
+                    width + 2 * padding * width,
+                    height + 2 * padding * height,
+                    linewidth=1,
+                    edgecolor="r",
+                    facecolor="none",
+                )
+                plt.gca().add_patch(padded_rect)
+                plt.text(
+                    min_x + width / 2,
+                    max_y + padding * height,
+                    codenum,
+                    horizontalalignment="center",
+                    verticalalignment="top",
+                    fontsize=10,
+                )
+
+        plt.title("RO_SDB_Vt_Targeting")
+        plt.xlabel("RO_nMOS_SDB_Vtsat (N)")
+        plt.ylabel("RO_pMOS_SDB_Vtsat (P)")
         plt.grid(True)
-        if output_dir:
-            file_path = os.path.join(output_dir, f"{codenum}_scatterplot.png")
-            plt.savefig(file_path)
+
+        handles, labels = plt.gca().get_legend_handles_labels()
+        unique_labels = dict(zip(labels, handles))
+        plt.legend(
+            unique_labels.values(),
+            [label.split("_")[1] for label in unique_labels.keys()],
+            loc="upper left",
+            bbox_to_anchor=(1, 1),
+        )
+
+        file_path = os.path.join(output_dir, "LVT_RVT_SLVT_scatterplot.png")
+        plt.savefig(file_path, bbox_inches="tight")
         plt.close()
 
 

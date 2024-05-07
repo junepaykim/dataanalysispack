@@ -11,13 +11,11 @@ def graph_boxplot(
     Generates a box plot for each data in the dictionary and saves them to pngs.
 
     Args:
-        data_dict (dict): A dictionary where keys are dataset names and values are lists of tuples.
+        aggregated_data (dict): A dictionary where keys are dataset names and values are lists of tuples.
                           Each tuple contains a pair of values (X, Y) for plotting.
         output_dir (str): The directory where the box plot images will be saved. If None, defaults to "./output".
         colorful (bool): Determines whether each box in the box plot should have a unique color.
                          If False, all boxes will use the default color.
-    Returns:
-        None: Saves the box plots.
     """
     if output_dir is None:
         output_dir = "./output"

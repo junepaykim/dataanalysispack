@@ -166,6 +166,27 @@ def graph_scatterplot(
         file_path = os.path.join(output_dir, "LVT_RVT_SLVT_scatterplot.png")
         plt.savefig(file_path, bbox_inches="tight")
         plt.close()
+        
+        for codenum in plot_data:
+            plt.figure(figsize=(10, 5))
+            belowdata = [data for data in plot_data[codenum] if data[0] <= 8]
+            
+            for data in belowdata:
+                modified_data = (int(data[0]), data[1], data[2])
+                plt.scatter(
+                    modified_data[1], modified_data[2],
+                    label=f"{int(data[0])}",
+                    alpha=0.5
+                )
+            
+            plt.title(f"Scatter Plot for {codenum}")
+            plt.xlabel("RO_nMOS_SDB_Vtsat (N)")
+            plt.ylabel("RO_pMOS_SDB_Vtsat (P)")
+            plt.grid(True)
+            plt.legend(loc="upper left", bbox_to_anchor=(1, 1))
+            plt.savefig(os.path.join(output_dir, f"{codenum}_Scatterplot.png"))
+            plt.close()
+
 
 
 def main():

@@ -5,7 +5,7 @@ import seaborn as sns
 
 
 def graph_boxplot(
-    data_dict: dict, output_dir: str = None, colorful: bool = False
+    aggregated_data: dict, output_dir: str = None, colorful: bool = False
 ) -> None:
     """
     Generates a box plot for each data in the dictionary and saves them to pngs.
@@ -17,15 +17,14 @@ def graph_boxplot(
         colorful (bool): Determines whether each box in the box plot should have a unique color.
                          If False, all boxes will use the default color.
     Returns:
-        None: This function does not return any value. It saves the box plots directly
-              to the filesystem.
+        None: Saves the box plots.
     """
     if output_dir is None:
         output_dir = "./output"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    for key, data in data_dict.items():
+    for key, data in aggregated_data.items():
         df = pd.DataFrame(data, columns=["X", "Y"])
         df = df[df["X"] <= 8]
 
@@ -35,16 +34,17 @@ def graph_boxplot(
             palette = "deep"
 
         plt.figure(figsize=(12, 8))
-        sns.boxplot(x="X", y="Y", hue="X", data=df, palette=palette, legend=False)
+        sns.boxplot(x="X", y="Y", hue="X", data=df, palette=palette)
         plt.title(f"{key}")
-        plt.xlabel("Measurement Index")
-        plt.ylabel("Measurement Value")
+        plt.xlabel("Wafer ID")
+        plt.ylabel("")
         plt.grid(True)
+        plt.legend(title="", loc="upper left", bbox_to_anchor=(1.02, 1))
 
         output_path = os.path.join(
             output_dir, f"{key.replace(' ', '_').replace('/', '_')}_boxplot.png"
         )
-        plt.savefig(output_path)
+        plt.savefig(output_path, bbox_inches="tight")
         plt.close()
 
 

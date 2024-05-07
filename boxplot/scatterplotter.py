@@ -1,15 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
 import os
 
 
 def process_excel_file(filename: str) -> dict:
     """
-    Processes an Excel file to extract data and aggregate it based on specific criteria.
-
-    This function reads an Excel file, iterates through its rows, and groups data based on
-    the first part of an item ID, while filtering based on a character suffix.
+    Processes an Excel file to extract data and aggregate it.
     It removes the first four columns, interprets the rest of the data,
     and returns a dictionary where keys are `codenum`s (item ID prefixes) and values
     are lists of tuples of aggregated data.
@@ -18,9 +14,7 @@ def process_excel_file(filename: str) -> dict:
         filename (str): The path to the Excel file to be processed.
 
     Returns:
-        dict: A dictionary containing the `codenum`s as keys. Each key is associated with
-              a list of tuples, where each tuple represents refined data entries consisting
-              of (N value, P value) pairs, organized by index.
+        dict: A dictionary containing the `codenum`s as keys.
     """
     xls = pd.ExcelFile(filename)
 
@@ -80,18 +74,16 @@ def process_excel_file(filename: str) -> dict:
 
 def graph_scatterplot(data_dict: dict, output_dir: str = None) -> None:
     """
-    Generates a scatter plot for each data group in the provided dictionary and
-    saves the plots to the specified directory or the default 'output' directory if none is provided.
+    Saves a scatter plot for each data group in the provided dictionary.
 
     Args:
         data_dict (dict): A dictionary where keys are codenums and values are lists of tuples,
                           each tuple containing a pair of floats (N value, P value).
-        output_dir (str): Optional; The directory where the scatter plot images will be saved.
+        output_dir (str): The directory where the scatter plot images will be saved.
                           If None, uses "./output".
 
     Returns:
-        None: This function does not return any value. It saves the scatter plots directly
-              to the filesystem.
+        None: Saves the scatter plots.
     """
     if output_dir is None:
         output_dir = "./output"

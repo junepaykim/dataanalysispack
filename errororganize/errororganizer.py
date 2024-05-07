@@ -3,10 +3,10 @@ import os
 
 def process_input_file(input_file_path: str) -> None:
     """
-    입력 파일을 읽고, 각 Operating Sequence / Pattern 을 분석하여
-    패턴명으로 에러 데이터가 포함된 파일을 생성
+    Read the input file and analyze each Operating Sequence / Pattern
+    Create a file containing error data with a pattern name.
     Args:
-        input_file_path (_type_): 처리하려는 입력 파일의 경로
+        input_file_path (_type_): Path to the input file you want to process
     """
     written_files = set()
 
@@ -37,12 +37,12 @@ def process_input_file(input_file_path: str) -> None:
 
 def write_rawdata(pattern: str, data_lines: list, file_mode: str) -> None:
     """
-    주어진 패턴명에 따라 에러 데이터를 파일에 작성
+    Write error data to a file according to the given pattern name.
 
     Args:
-        pattern (str): 파일명으로 사용될 패턴명
-        data_lines (list): 파일에 작성할 데이터 라인들의 리스트
-        file_mode (str): 파일을 열 때 사용할 모드 ('w', 'a')
+        pattern (str): Pattern name to be used as file name
+        data_lines (list): List of data lines to write to file
+        file_mode (str): Mode to use when opening the file ('w', 'a')
     """
     if len(data_lines) > 1:
         filename = f"{pattern}.txt"
@@ -56,17 +56,19 @@ def write_rawdata(pattern: str, data_lines: list, file_mode: str) -> None:
             for line in unique_lines:
                 parts = line.split()
                 parts3_replace = 1 if parts[3] == "H" else 0
-                formatted_line = f"C {parts[2]:<15}\t{parts[1]:<10}\t{parts3_replace:<15}\n"
+                formatted_line = (
+                    f"C {parts[2]:<15}\t{parts[1]:<10}\t{parts3_replace:<15}\n"
+                )
                 output_file.write(formatted_line)
 
 
 def sort_and_remove_duplicates(filename: str) -> None:
     """
-    지정된 파일에서 중복을 제거하고 cycle로 데이터를 정렬
-    파일 내의 데이터를 정렬된 상태로 유지
+    Remove duplicates from specified files and sort data by cycle
+    Keep data within files sorted
 
     Args:
-        filename (str): 중복 제거 및 정렬을 수행할 파일명
+        filename (str): File name to remove duplicates and sort
     """
     if os.path.exists(filename):
         with open(filename, "r", encoding="utf-8") as file:
@@ -76,13 +78,13 @@ def sort_and_remove_duplicates(filename: str) -> None:
 
         def custom_sort_key(x):
             parts = x.split()
-            
+
             if parts[0].isdigit():
                 return int(parts[0])
             elif len(parts[0]) == 1 and parts[1].isdigit():
                 return int(parts[1])
             else:
-                return float('inf')
+                return float("inf")
 
         sorted_lines = sorted(unique_lines, key=custom_sort_key)
 
@@ -92,7 +94,7 @@ def sort_and_remove_duplicates(filename: str) -> None:
 
 
 def main():
-    # input_file_name 조정을 통해 처리 대상 파일 지정 가능
+    # input_file_name to select specific input file
     input_file_name = "inputdata"
     current_dir = os.path.dirname(os.path.abspath(__file__))
     input_file_path = os.path.join(current_dir, input_file_name)

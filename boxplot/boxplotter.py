@@ -73,6 +73,7 @@ def aggregate_data(data: dict) -> dict:
                 elif col not in columns_added:
                     continue
 
+    
     return aggregated_data
 
 

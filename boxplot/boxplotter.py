@@ -24,7 +24,6 @@ def graph_boxplot(
 
     for key, data in aggregated_data.items():
         df = pd.DataFrame(data, columns=["X", "Y"])
-        df = df[df["X"] <= 8]
 
         if colorful:
             palette = sns.color_palette("hsv", n_colors=len(df["X"].unique()))
@@ -65,9 +64,14 @@ def aggregate_data(data: dict) -> dict:
             if item_id not in aggregated_data:
                 aggregated_data[item_id] = []
 
-            for col in df.columns:
-                if str(col).isdigit():
-                    aggregated_data[item_id].append((int(col), row[col]))
+            columns_added = set()
+
+            for col in df.columns[4:]:
+                if len(columns_added) < 8:
+                    aggregated_data[item_id].append((col, row[col]))
+                    columns_added.add(col)
+                elif col not in columns_added:
+                    continue
 
     return aggregated_data
 

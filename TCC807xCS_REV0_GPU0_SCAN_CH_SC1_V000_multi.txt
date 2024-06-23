@@ -1,9 +1,0 @@
-Failing Cycles 	Signal    	Expected States
-C 498            	GPIO_E13  	1              
-C 498            	GPIO_E12  	1              
-C 500            	GPIO_E13  	1              
-C 502            	GPIO_E13  	1              
-C 502            	GPIO_E12  	1              
-C 504            	GPIO_E13  	1              
-C 506            	GPIO_E12  	1              
-C 506            	GPIO_E13  	1              
